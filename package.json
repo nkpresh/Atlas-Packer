@@ -1,0 +1,21 @@
+{
+  "name": "atlaspacker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "AtlasPacker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "AtlasPacker.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nkpresh/Atlas-Packer.git"
+  },
+  "keywords": [],
+  "author": "Nkwua Precious",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nkpresh/Atlas-Packer/issues"
+  },
+  "homepage": "https://github.com/nkpresh/Atlas-Packer#readme"
+}
