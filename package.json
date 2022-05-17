@@ -21,6 +21,7 @@
   "dependencies": {
     "atlaspack": "^1.0.0",
     "canvas": "^2.9.1",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "pixi.js": "^6.3.2"
   }
 }
