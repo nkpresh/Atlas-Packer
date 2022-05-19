@@ -1,23 +1,24 @@
-import * as PIXI from 'pixi.js';
-import { Spine } from 'pixi-spine';
+import * as PIXI from './node_modules/pixi.js/dist/browser/pixi.min.mjs';
 
 const app = new PIXI.Application();
+
+
 document.body.appendChild(app.view);
 
-app.loader
-    .add('spineCharacter', './assets/export/goblins-pro.json')
-    .load(function (loader, resources) {
-        const animation = new Spine(resources.spineCharacter.spineData);
+app.loader.add('bunny', 'assets/images/4.png').load((loader, resources) => {
+    const bunny = new PIXI.Sprite(resources.bunny.texture);
 
-        // add the animation to the scene and render...
-        app.stage.addChild(animation);
+    bunny.x = app.renderer.width / 2;
+    bunny.y = app.renderer.height / 2;
 
-        if (animation.state.hasAnimation('walk')) {
-            // run forever, little boy!
-            animation.state.setAnimation(0, 'walk', true);
-            // dont run too fast
-            animation.state.timeScale = 0.1;
-        }
+    // Rotate around the center
+    bunny.anchor.x = 0.5;
+    bunny.anchor.y = 0.5;
 
-        app.start();
+    app.stage.addChild(bunny);
+
+    // Listen for frame updates
+    app.ticker.add(() => {
+        bunny.rotation += 0.01;
     });
+});
