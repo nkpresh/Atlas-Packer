@@ -1,31 +1,23 @@
-import * as PIXI from 'pixi.js'
+import * as PIXI from 'pixi.js';
+import { Spine } from 'pixi-spine';
 
 const app = new PIXI.Application();
-
-// The application will create a canvas element for you that you
-// can then insert into the DOM.
 document.body.appendChild(app.view);
 
-// load the texture we need
-app.loader.add('bunny', 'bunny.png').load((loader, resources) => {
+app.loader
+    .add('spineCharacter', './assets/export/goblins-pro.json')
+    .load(function (loader, resources) {
+        const animation = new Spine(resources.spineCharacter.spineData);
 
-    // This creates a texture from a 'bunny.png' image.
-    const bunny = new PIXI.Sprite(resources.bunny.texture);
+        // add the animation to the scene and render...
+        app.stage.addChild(animation);
 
-    // Setup the position of the bunny
-    bunny.x = app.renderer.width / 2;
-    bunny.y = app.renderer.height / 2;
+        if (animation.state.hasAnimation('walk')) {
+            // run forever, little boy!
+            animation.state.setAnimation(0, 'walk', true);
+            // dont run too fast
+            animation.state.timeScale = 0.1;
+        }
 
-    // Rotate around the center
-    bunny.anchor.x = 0.5;
-    bunny.anchor.y = 0.5;
-
-    // Add the bunny to the scene we are building.
-    app.stage.addChild(bunny);
-
-    // Listen for frame updates
-    app.ticker.add(() => {
-        // each frame we spin the bunny around a bit
-        bunny.rotation += 0.01;
+        app.start();
     });
-});

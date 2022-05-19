@@ -22,6 +22,7 @@
     "atlaspack": "^1.0.0",
     "canvas": "^2.9.1",
     "fs": "^0.0.1-security",
+    "pixi-spine": "^3.0.13",
     "pixi.js": "^6.3.2"
   }
 }
