@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "index.html --open"
+    "start": "atlas_jsonpacker.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/nkpresh/Atlas-Packer#readme",
   "dependencies": {
+    "line-reader": "^0.4.0",
     "lodash": "^4.17.21",
     "pixi-spine": "^3.0.13",
     "pixi.js": "^5.0.0-rc"
