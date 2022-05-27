@@ -1,24 +1,22 @@
+const { error } = require("console");
 const e = require("express");
 const fs = require("fs");
 const lineReader = require('line-reader');
-const { delay } = require("lodash");
 
 var atlasDocuments = []
 var fileDir = "./assets/export/goblins-pma.atlas";
 var finishedProduct = {};
 
-
-
-
-async function loadAtlasFile(dir) {
+function loadAtlasFile(dir) {
     lineReader.eachLine(dir, function (line) {
-        // atlasDocuments.push(line)
-        console.log("still reading")
+            atlasDocuments.push(line)
+    }, function (err) {
+        if(err){
+            throw error("can not find file");
+        }
+        breakAtlas(atlasDocuments);
     });
-    
-    let complete = await console.log("done");
 }
-
 function breakAtlas(textFile) {
     for (var i = 0; i < textFile.length; i++) {
         var line = textFile[i].toString();
@@ -34,12 +32,13 @@ function breakAtlas(textFile) {
             }
         }
     }
+    console.log(finishedProduct);
     return finishedProduct
 }
 function extractVariables(stringVar, line) {
     let columnIndex = stringVar.indexOf(":");
     let key = stringVar.slice(1, columnIndex);
-    let value = stringVar.slice(columnIndex + 2, stringVar.length);    
+    let value = stringVar.slice(columnIndex + 2, stringVar.length);
     if (value == "false") {
         value = false;
     } else if (value == "true") {
@@ -78,10 +77,9 @@ function extractVariables(stringVar, line) {
     else {
         return new Error("this item is not compatable: " + value);
     }
+    key = key.slice(1);
     line[key] = value;
     return line;
 }
+
 loadAtlasFile(fileDir);
-    // breakAtlas(atlasDocuments);
-    // console.log("finished reading");
-// process_atlas(fileDir);
